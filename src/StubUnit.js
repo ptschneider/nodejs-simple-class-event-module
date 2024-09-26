@@ -1,4 +1,5 @@
 const EventEmitter = require('node:events');
+const {builtinModules: builtin} = require("node:module");
 class StubUnit{
 
     emitter = new EventEmitter();
@@ -30,7 +31,7 @@ class StubUnit{
         catch(ex){
             setTimeout(() => {
                 newObj.emitter.emit('error');
-            }, 5);
+            }, StubUnit.getRandomIntInclusive(50,3000) );
         }
         return newObj;
     }
@@ -38,3 +39,17 @@ class StubUnit{
 
 module.exports = StubUnit
 
+/*setTimeout(() => {
+    console.info('----------------------------------------');
+    console.info(`__filename=[${__filename}]`);
+    console.info(`__dirname=[${__dirname}]`);
+    console.info('require.main:');
+    console.info(require.main);
+    //const {builtinModules: builtin} = require("node:module");
+    const builtin = require('node:module').builtinModules;
+
+    console.info(`module.builtinModules=[${builtin}]`);
+    console.info(`module.filename=[${module.filename}]`);
+    console.info(`module.id=[${module.id}]`);
+    console.info('----------------------------------------');
+}, 5 );*/

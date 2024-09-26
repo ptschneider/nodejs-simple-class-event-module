@@ -1,5 +1,5 @@
 {
-  "name": "simple-class-event-module",
+  "name": "simple-class-event-module-commander",
   "type": "commonjs",
   "version": "1.0.0",
   "description": "",
@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node --trace-warnings dist/index.js",
-    "start:dev": "NODE_ENV=dev node --trace-warnings src/index.js",
+    "start:dev": "NODE_ENV=dev node --trace-warnings src/index.js whatunits",
     "build": "cp -R src/* dist/",
     "clean": "rm -rf node_modules"
   },
@@ -16,5 +16,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.4.0"
+  }
 }

@@ -5,23 +5,15 @@ const mode = "console";
 
 class EventDemoRunner{
 
+    allUnitNames = [];
     allUnits = [];
-    showMyEnv(){
-        console.info(`__filename=[${__filename}]`);
-        console.info(`__dirname=[${__dirname}]`);
-        console.info('require.main:');
-        console.info(require.main);
-        //const {builtinModules: builtin} = require("node:module");
-        const builtin = require('node:module').builtinModules;
-
-        console.info(`module.builtinModules=[${builtin}]`);
-        console.info(`module.filename=[${module.filename}]`);
-        console.info(`module.id=[${module.id}]`);
-    }
 
     shutdown(key){
-        console.log(`shutdown invoked, key=${key}`);
-        const code = key.length > 0 ? 1 : 0;
+        let code = 0;
+        if(key.length > 0){
+            console.log(`shutdown invoked, key=${key}`);
+            code = 1;
+        }
         process.exit(code);
     }
 
@@ -51,6 +43,7 @@ class EventDemoRunner{
     }
 
     async createUnits(names){
+        this.allUnitNames = names;
         for(let i = 0; i < names.length; i++){
             this.allUnits.push(StubUnit.build(names[i]));
         }
@@ -64,3 +57,19 @@ module.exports = {
     runnerClass: EventDemoRunner,
     runnerMode: mode
 }
+
+/* Illustrates how module metadata is different on a per-file basis
+  setTimeout(() => {
+    console.info('----------------------------------------');
+    console.info(`__filename=[${__filename}]`);
+    console.info(`__dirname=[${__dirname}]`);
+    console.info('require.main:');
+    console.info(require.main);
+    //const {builtinModules: builtin} = require("node:module");
+    const builtin = require('node:module').builtinModules;
+
+    console.info(`module.builtinModules=[${builtin}]`);
+    console.info(`module.filename=[${module.filename}]`);
+    console.info(`module.id=[${module.id}]`);
+    console.info('----------------------------------------');
+}, 5 );*/
